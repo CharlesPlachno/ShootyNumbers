@@ -15,8 +15,8 @@ AShootyNumbersGameMode::AShootyNumbersGameMode()
 	// use our custom HUD class
 	HUDClass = AShootyNumbersHUD::StaticClass();
 
-	bGameActive = true;
-	bCanRoll = true;
+	bGameActive = false;
+	bCanRoll = false;
 	bPauseTargets = true;
 	bDidWin = false;
 	DiceRoll1 = 0;
@@ -28,12 +28,18 @@ AShootyNumbersGameMode::AShootyNumbersGameMode()
 
 void AShootyNumbersGameMode::StartGame()
 {
+	bDidWin = false;
 	bGameActive = true;
 	bCanRoll = true;
+	TargetsUp.Init(false, 9);
+	bPauseTargets = false;
 }
 
 void AShootyNumbersGameMode::RollDice()
 {
+	if (!bGameActive) {
+		StartGame();
+	}
 	if (bCanRoll)
 	{
 		DiceRoll1 = FMath::RandRange(1, 6);
@@ -53,39 +59,48 @@ void AShootyNumbersGameMode::SetHitTarget(int32 TargetNumber)
 {
 	int32 Index = TargetNumber - 1;
 	// Check if this target has already been hit
-	if (!TargetsUp[Index])
+	if (!bPauseTargets) 
 	{
-		// If not, set it to true
-		TargetsUp[Index] = true;
-		UE_LOG(LogTemp, Warning, TEXT("Target hit"));
-
-		// Add Target Number to turn total
-		TurnTotal += TargetNumber;
-
-		// Check if hit this turn target value is equal or over total
-		if (TurnTotal == DiceTotal)
+		if (!TargetsUp[Index])
 		{
-			TurnOver();
-		}
-		else if (TurnTotal > DiceTotal)
-		{
-			Lose();
+			// If not, set it to true
+			TargetsUp[Index] = true;
+			UE_LOG(LogTemp, Warning, TEXT("Target hit"));
+
+			// Add Target Number to turn total
+			TurnTotal += TargetNumber;
+
+			// Check if hit this turn target value is equal or over total
+			if (TurnTotal == DiceTotal)
+			{
+				TurnOver();
+			}
+			else if (TurnTotal > DiceTotal)
+			{
+				Lose();
+			}
 		}
 	}
 }
 void AShootyNumbersGameMode::Win()
 {
-
+	bDidWin = true;
+	bPauseTargets = true;
+	bCanRoll = false;
+	bGameActive = false;
 }
 
 void AShootyNumbersGameMode::Lose()
 {
-
+	bPauseTargets = true;
+	bCanRoll = false;
+	bGameActive = false;
 }
 
 void AShootyNumbersGameMode::TurnOver()
 {
-
+	bPauseTargets = true;
+	bCanRoll = true;
 	// Check if Game Won
 	if (CheckAllTargets())
 	{
@@ -97,7 +112,7 @@ bool AShootyNumbersGameMode::CheckAllTargets()
 {
 	for (bool TargetState : TargetsUp)
 	{
-		if (TargetState)
+		if (!TargetState)
 		{
 			return false;
 		}

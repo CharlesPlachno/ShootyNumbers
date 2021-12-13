@@ -29,7 +29,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
 	bool bDidWin;
 
-	// Bool Array to represent which Targets are not hit. Game is won when all are false
+	// Bool Array to represent which Targets are hit. Game is won when all are true
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
 	TArray<bool> TargetsUp;
 
