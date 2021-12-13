@@ -17,6 +17,8 @@ AShootyNumbersGameMode::AShootyNumbersGameMode()
 
 	bGameActive = true;
 	bCanRoll = true;
+	bPauseTargets = true;
+	bDidWin = false;
 	DiceRoll1 = 0;
 	DiceRoll2 = 0;
 	DiceTotal = 0;
@@ -93,12 +95,12 @@ void AShootyNumbersGameMode::TurnOver()
 
 bool AShootyNumbersGameMode::CheckAllTargets()
 {
-	//for (bool TargetState : TargetsUp)
-	//{
-	//	if (!TargetState)
-	//	{
-	//		return false;
-	//	}
-	//}
+	for (bool TargetState : TargetsUp)
+	{
+		if (TargetState)
+		{
+			return false;
+		}
+	}
 	return true;
 }

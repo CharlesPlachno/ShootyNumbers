@@ -18,20 +18,26 @@ public:
 
 	// False when the game ends by win or loss, true when it is started
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
-		bool bGameActive;
+	bool bGameActive;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
-		bool bCanRoll;
+	bool bCanRoll;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
+	bool bPauseTargets;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
+	bool bDidWin;
 
 	// Bool Array to represent which Targets are not hit. Game is won when all are false
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
-		TArray<bool> TargetsUp;
+	TArray<bool> TargetsUp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Dice)
-		int32 DiceRoll1;
+	int32 DiceRoll1;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Dice)
-		int32 DiceRoll2;
+	int32 DiceRoll2;
 
 	int32 DiceTotal;
 
