@@ -64,6 +64,9 @@ public:
 	void TurnOver();
 
 	bool CheckAllTargets();
+
+	UFUNCTION(BlueprintCallable)
+	bool GetTargetStatus(int32 TargetNumber);
 };
 
 

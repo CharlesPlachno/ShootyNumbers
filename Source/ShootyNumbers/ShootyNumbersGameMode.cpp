@@ -124,3 +124,8 @@ bool AShootyNumbersGameMode::CheckAllTargets()
 	}
 	return true;
 }
+
+bool AShootyNumbersGameMode::GetTargetStatus(int32 TargetNumber)
+{
+	return TargetsUp[TargetNumber - 1];
+}
