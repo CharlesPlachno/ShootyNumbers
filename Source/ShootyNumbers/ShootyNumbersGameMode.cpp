@@ -34,6 +34,11 @@ void AShootyNumbersGameMode::StartGame()
 	bCanRoll = true;
 	TargetsUp.Init(false, 9);
 	bPauseTargets = false;
+	DiceRoll1 = 0;
+	DiceRoll2 = 0;
+	DiceTotal = 0;
+	TurnTotal = 0;
+	bWaitForRoll = true;
 }
 
 void AShootyNumbersGameMode::RollDice()

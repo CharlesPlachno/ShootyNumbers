@@ -16,7 +16,7 @@ AGameButton::AGameButton()
 	ButtonLabel = CreateDefaultSubobject<UTextRenderComponent>(TEXT("NumberDisplay"));
 
 	// Setup scene hierarchy
-	Mesh->SetupAttachment(GetRootComponent());
+	RootComponent = Mesh;
 	ButtonCollision->SetupAttachment(Mesh);
 	ButtonLabel->SetupAttachment(Mesh);
 

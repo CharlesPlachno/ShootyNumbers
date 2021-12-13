@@ -19,7 +19,7 @@ ANumberedTarget::ANumberedTarget()
 	NumberDisplay = CreateDefaultSubobject<UTextRenderComponent>(TEXT("NumberDisplay"));
 
 	// Setup scene hierarchy
-	Mesh->SetupAttachment(GetRootComponent());
+	RootComponent = Mesh;
 	TargetCollision->SetupAttachment(Mesh);
 	NumberDisplay->SetupAttachment(Mesh);
 
@@ -27,15 +27,12 @@ ANumberedTarget::ANumberedTarget()
 
 	StartingLocation = GetActorLocation();
 	Number = 0;
-	bIsActive = false;
-	bIsHit = false;
 }
 
 // Called when the game starts or when spawned
 void ANumberedTarget::BeginPlay()
 {
 	Super::BeginPlay();
-	bIsActive = true;
 }
 
 // Called every frame
@@ -47,23 +44,16 @@ void ANumberedTarget::Tick(float DeltaTime)
 
 void ANumberedTarget::HitTarget()
 {
-	if (bIsActive)
+	AShootyNumbersGameMode* MyGameMode = Cast<AShootyNumbersGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (MyGameMode)
 	{
-		bIsHit = true;
-		AShootyNumbersGameMode* MyGameMode = Cast<AShootyNumbersGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-		if (MyGameMode)
-		{
-			// Tell game mode we were hit
-			MyGameMode->SetHitTarget(Number);
-			bIsActive = false;
-		}
+		// Tell game mode we were hit
+		MyGameMode->SetHitTarget(Number);
 
 	}
 }
 void ANumberedTarget::Reset()
 {
 	SetActorLocation(StartingLocation);
-	bIsActive = true;
-	bIsHit = false;
 }
 

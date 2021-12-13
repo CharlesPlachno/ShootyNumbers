@@ -37,14 +37,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Target)
 		int32 Number;
 
-	// The dice roll result will determine which targets are active for hitting
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Target)
-		bool bIsActive;
-
-	// Mark if the target has been hit when active
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Target)
-		bool bIsHit;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
