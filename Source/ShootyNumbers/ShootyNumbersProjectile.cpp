@@ -3,6 +3,7 @@
 #include "ShootyNumbersProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "NumberedTarget.h"
 
 AShootyNumbersProjectile::AShootyNumbersProjectile() 
 {
@@ -34,12 +35,12 @@ AShootyNumbersProjectile::AShootyNumbersProjectile()
 
 void AShootyNumbersProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	// ANumberedTarget* Target = Cast<ANumberedTarget>(OtherActor);
-	// if (Target)
-	// {
-	// 	UE_LOG(LogTemp, Warning, TEXT("Hitting Target."));
-	// 	Target->HitTarget();
-	// }
+	 ANumberedTarget* Target = Cast<ANumberedTarget>(OtherActor);
+	 if (Target)
+	 {
+	 	UE_LOG(LogTemp, Warning, TEXT("Hitting Target."));
+	 	Target->HitTarget();
+	 }
 
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())

@@ -29,6 +29,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
 	bool bDidWin;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
+	bool bWaitForRoll;
+
 	// Bool Array to represent which Targets are hit. Game is won when all are true
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameStatus")
 	TArray<bool> TargetsUp;
@@ -41,6 +44,7 @@ public:
 
 	int32 DiceTotal;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Dice)
 	int32 TurnTotal;
 
 	// Game Functions

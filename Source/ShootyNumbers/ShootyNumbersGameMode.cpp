@@ -15,6 +15,7 @@ AShootyNumbersGameMode::AShootyNumbersGameMode()
 	// use our custom HUD class
 	HUDClass = AShootyNumbersHUD::StaticClass();
 
+	bWaitForRoll = false;
 	bGameActive = false;
 	bCanRoll = false;
 	bPauseTargets = true;
@@ -42,6 +43,8 @@ void AShootyNumbersGameMode::RollDice()
 	}
 	if (bCanRoll)
 	{
+		bPauseTargets = false;
+		bWaitForRoll = false;
 		DiceRoll1 = FMath::RandRange(1, 6);
 		DiceRoll2 = FMath::RandRange(1, 6);
 
@@ -84,6 +87,7 @@ void AShootyNumbersGameMode::SetHitTarget(int32 TargetNumber)
 }
 void AShootyNumbersGameMode::Win()
 {
+	bWaitForRoll = false;
 	bDidWin = true;
 	bPauseTargets = true;
 	bCanRoll = false;
@@ -99,6 +103,7 @@ void AShootyNumbersGameMode::Lose()
 
 void AShootyNumbersGameMode::TurnOver()
 {
+	bWaitForRoll = true;
 	bPauseTargets = true;
 	bCanRoll = true;
 	// Check if Game Won

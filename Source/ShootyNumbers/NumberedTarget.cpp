@@ -54,7 +54,7 @@ void ANumberedTarget::HitTarget()
 		if (MyGameMode)
 		{
 			// Tell game mode we were hit
-			//MyGameMode->SetHitTarget(Number);
+			MyGameMode->SetHitTarget(Number);
 			bIsActive = false;
 		}
 
